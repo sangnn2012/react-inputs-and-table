@@ -1,0 +1,43 @@
+.dropdown-input {
+  //   .form-select {
+  //     width: 200px;
+  //     background-image: url("../../assets/images/caret-down-solid.svg");
+  //   }
+  display: inline-block;
+  .dropdown-form {
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+  .dropdown-menu {
+    transform: translate(0, 40px) !important;
+    width: 130%;
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: darkgray;
+    .dropdown-item {
+      color: white;
+      &:hover {
+        background-color: #0d6efd;
+      }
+    }
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: lightgray;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}

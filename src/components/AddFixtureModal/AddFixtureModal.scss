@@ -1,0 +1,13 @@
+.add-fixture-modal {
+  &-body {
+    .inputs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+    .fixture-list {
+    }
+  }
+}

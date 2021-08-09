@@ -1,0 +1,12 @@
+.icon-button-wrapper {
+  .icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .icon {
+    width: 12px;
+  }
+}
