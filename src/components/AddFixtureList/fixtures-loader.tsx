@@ -1,8 +1,14 @@
-import { useRef } from "react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { toODataString } from "@progress/kendo-data-query";
+import Pagination from 'models/Pagination.model'
 
-export const ProductsLoader = (props) => {
+interface FixtureLoaderProps {
+  dataState: Pagination,
+  onDataReceived: Function
+}
+
+export const FixturesLoader = (props: FixtureLoaderProps) => {
   const baseUrl = "https://demos.telerik.com/kendo-ui/service-v4/odata/Products?$count=true&";
   const init = {
     method: "GET",
@@ -10,8 +16,8 @@ export const ProductsLoader = (props) => {
     headers: {},
   };
 
-  const lastSuccess = useRef("");
-  const pending = useRef("");
+  const lastSuccess = React.useRef("");
+  const pending = React.useRef("");
 
   const requestDataIfNeeded = () => {
     if (pending.current || toODataString(props.dataState) === lastSuccess.current) {
@@ -34,16 +40,16 @@ export const ProductsLoader = (props) => {
         // }
 
         const aRow = {
-          RoomName: "Bath Room",
-          LoadName: "a load name",
-          CircuitNumber: "BH-12345",
-          FixtureType: "type 1",
-          LoadType: "a load type",
-          FixtureQuantity: 10,
-          FixtureWatts: 100,
-          IsDim: true,
+          FixtureName: "LED Light",
+          LoadType: "Type 2",
+          Dim: true,
           LowerLimit: 5,
-          UpperLimit: 95,
+          UpperLimit: 96,
+          FixtureWatts: 10,
+          FixtureType: "Type Fixture",
+          Manufacturer: "Sony",
+          ModelNumber: "Model-999",
+          Description: "Late 2021 Model",
         };
         const data = new Array(65).fill(0).map((_, index) => Object.assign({ID: ++index}, aRow));
 

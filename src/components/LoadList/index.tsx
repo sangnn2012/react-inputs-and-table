@@ -1,5 +1,5 @@
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
-import { ProductsLoader } from "./products-loader.jsx";
+import { ProductsLoader } from "./products-loader";
 import Table from "models/Table.model";
 import Load from "models/Load.model";
 

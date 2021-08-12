@@ -1,5 +1,6 @@
+import Pagination from './Pagination.model'
 interface TableModel {
-    dataState: Object,
+    dataState: Pagination,
     onDataStateChange: Function,
     onDataReceived: Function
 }

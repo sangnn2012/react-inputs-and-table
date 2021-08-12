@@ -1,5 +1,5 @@
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
-import { FixturesLoader } from "./fixtures-loader.jsx";
+import { FixturesLoader } from "./fixtures-loader";
 import TableModel from 'models/Table.model'
 import Fixture from 'models/Fixture.model'
 
