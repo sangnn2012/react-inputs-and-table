@@ -1,25 +1,27 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 
-import PropTypes from "prop-types";
 import BaseInput from "components/BaseInput";
+import BaseInputModel from "components/BaseInput/BaseInput.model";
+
 import downCaret from "../../assets/images/caret-down-solid.svg";
 import upCaret from "../../assets/images/caret-up-solid.svg";
 
 import "./NumberInput.scss";
 
-NumberInput.propTypes = {};
-NumberInput.defaultProps = {
-  currentQuantity: 0,
-};
-function NumberInput(props) {
+interface NumberInputProps extends BaseInputModel {
+  currentQuantity: number,
+  onQuantityChange: Function
+}
+
+function NumberInput(props: NumberInputProps) {
   const { label, isRequired, currentQuantity, onQuantityChange } = props;
-  function handleQuantityInput(event) {
+  function handleQuantityInput(event: ChangeEvent<any>) {
     if (onQuantityChange) {
       onQuantityChange(event.target.value);
     }
   }
-  function handleQuantityChange(operator) {
+  function handleQuantityChange(operator: string) {
     if (onQuantityChange) {
       switch (operator) {
         case "up":

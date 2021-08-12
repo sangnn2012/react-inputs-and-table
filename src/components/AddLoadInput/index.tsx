@@ -1,16 +1,18 @@
-import React from 'react';
-import { InputGroup, FormControl, Button } from 'react-bootstrap'
-import BaseInput from 'components/BaseInput'
-import PropTypes from 'prop-types';
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import BaseInput from 'components/BaseInput';
 import './AddLoadInput.scss';
 import plusIcon from '../../assets/images/plus-circle-solid.svg';
-AddLoadInput.propTypes = {
+import BaseInputModel from 'components/BaseInput/BaseInput.model';
+import { ChangeEvent } from 'react';
 
-};
+interface AddLoadInputProps extends BaseInputModel {
+    onInputChange: Function,
+    onSubmit: Function
+}
 
-function AddLoadInput(props) {
+function AddLoadInput(props: AddLoadInputProps) {
     const { label, isRequired, onInputChange, onSubmit } = props;
-    function handleInputChange(event) {
+    function handleInputChange(event: ChangeEvent<any>) {
         if (onInputChange) {
             onInputChange(event.target.value)
         }

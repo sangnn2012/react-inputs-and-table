@@ -1,41 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { ChangeEvent } from "react";
 import { Dropdown, ButtonGroup, FormControl } from "react-bootstrap";
-import BaseInput from "components/BaseInput/index.jsx";
-
+import BaseInput from "components/BaseInput";
+import BaseInputModel from "components/BaseInput/BaseInput.model";
 import "./DropdownInput.scss";
-DropdownInput.propTypes = {
-  currentItem: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string),
-  onItemChosen: PropTypes.func,
-};
 
-function DropdownInput(props) {
+interface DropdownInputProps extends BaseInputModel {
+  placeholder: string,
+  currentItem: string,
+  options: Array<string>,
+  onItemChosen: Function
+}
+
+function DropdownInput(props: DropdownInputProps) {
   const { label, placeholder, isRequired, currentItem, options, onItemChosen } = props;
-  function handleItemChosen(name) {
+  function handleItemChosen(name: string | null) {
     if (onItemChosen) {
       onItemChosen(name);
     }
   }
-  function handleInputChange(event) {
+  function handleInputChange(event: ChangeEvent<any>) {
     if (onItemChosen) {
       onItemChosen(event.target.value);
     }
   }
   return (
     <div className="dropdown-input">
-      {/* <BaseInput label={"Room Name"} isRequired={true}>
-        <Form.Select value={currentItem} onChange={(event) => handleItemChosen(event)} placeholder="Select Room..." aria-label="">
-          <option value={null}>{null}</option>
-          <option>...Add new</option>
-          {options.map((name, index) => (
-            <option value={name} key={`${name}-${index}`}>
-              {name}
-            </option>
-          ))}
-        </Form.Select>
-      </BaseInput> */}
-
       <BaseInput label={label} isRequired={isRequired}>
         <Dropdown as={ButtonGroup}>
           <FormControl className='dropdown-form' value={currentItem} onChange={(event) => handleInputChange(event)} type="text" placeholder={placeholder} aria-label={placeholder} aria-describedby="basic-addon1" />

@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import TextInput from "components/TextInput";
 import DropdownInput from "components/DropdownInput";
@@ -8,72 +7,78 @@ import IconButton from "components/IconButton";
 import AddFixtureList from "components/AddFixtureList";
 import "./AddFixtureModal.scss";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import plusIcon from "../../assets/images/plus-solid.svg";
-AddFixtureModal.propTypes = {};
+import Fixture from 'models/Fixture.model'
+import Pagination from 'models/Pagination.model'
+interface AddFixtureModalProps {
+  show: boolean,
+  onHide: () => void
+}
 
-function AddFixtureModal(props) {
+
+
+function AddFixtureModal(props: AddFixtureModalProps) {
   const loadTypes = ["0-10V (Fluorescent Ballast)", "0-10 (LED Driver)", "Ceiling Fan", "ELV/LED", "Fluorescent (2-wire)", "Incandescent", "MLV"];
 
-  const [fixtureName, setFixtureName] = useState("");
-  const [loadType, setLoadType] = useState("");
-  const [isDim, setIsDim] = useState("");
-  const [lowerLimit, setLowerLimit] = useState("");
-  const [upperLimit, setUpperLimit] = useState("");
-  const [fixtureWatts, setFixtureWatts] = useState("");
-  const [fixtureType, setFixtureType] = useState("");
-  const [manufacturer, setManufacturer] = useState("");
-  const [modelNumber, setModelNumber] = useState("");
-  const [description, setDescription] = useState("");
-  const [fixtures, setFixtures] = useState([]);
-  const [dataState, setDataState] = useState({
+  const [fixtureName, setFixtureName] = useState<string>("");
+  const [loadType, setLoadType] = useState<string>("");
+  const [isDim, setIsDim] = useState<boolean>(false);
+  const [lowerLimit, setLowerLimit] = useState<number>(0);
+  const [upperLimit, setUpperLimit] = useState<number>(0);
+  const [fixtureWatts, setFixtureWatts] = useState<number>(0);
+  const [fixtureType, setFixtureType] = useState<string>("");
+  const [manufacturer, setManufacturer] = useState<string>("");
+  const [modelNumber, setModelNumber] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [fixtures, setFixtures] = useState<Fixture[]>([]);
+  const [dataState, setDataState] = useState<Pagination>({
     take: 10,
     skip: 0,
   });
 
-  function dataStateChange(event) {
+  function dataStateChange(event: { dataState: Pagination }) {
     setDataState(event.dataState);
   }
-  function dataReceived(fixtures) {
+  function dataReceived(fixtures: Fixture[]) {
     setFixtures(fixtures);
   }
-  function handleFixtureNameChange(newFixtureName) {
+  function handleFixtureNameChange(newFixtureName: string) {
     console.log(newFixtureName);
     setFixtureName(newFixtureName);
   }
-  function handleLoadTypeSelect(newLoadType) {
+  function handleLoadTypeSelect(newLoadType: string) {
     console.log({ newLoadType });
     setLoadType(newLoadType);
   }
-  function handleDimChange(newDimValue) {
+  function handleDimChange(newDimValue: boolean) {
     console.log({ newDimValue });
     setIsDim(newDimValue);
   }
-  function handleLowerLimit(newLowerLimit) {
+  function handleLowerLimit(newLowerLimit: number) {
     console.log({ newLowerLimit });
     setLowerLimit(newLowerLimit);
   }
-  function handleUpperLimit(newUpperLimit) {
+  function handleUpperLimit(newUpperLimit: number) {
     console.log({ newUpperLimit });
     setUpperLimit(newUpperLimit);
   }
-  function handleFixtureWatts(newFixtureWatts) {
+  function handleFixtureWatts(newFixtureWatts: number) {
     console.log({ newFixtureWatts });
     setFixtureWatts(newFixtureWatts);
   }
-  function handleFixtureTypeChange(newFixtureType) {
+  function handleFixtureTypeChange(newFixtureType: string) {
     console.log({ newFixtureType });
     setFixtureType(newFixtureType);
   }
-  function handleManufacturerChange(newManufacturer) {
+  function handleManufacturerChange(newManufacturer: string) {
     console.log({ newManufacturer });
     setManufacturer(newManufacturer);
   }
-  function handleModelNumberChange(newModelNumber) {
+  function handleModelNumberChange(newModelNumber: string) {
     console.log({ newModelNumber });
     setModelNumber(newModelNumber);
   }
-  function handleDescriptionChange(newDescription) {
+  function handleDescriptionChange(newDescription: string) {
     console.log({ newDescription });
     setDescription(newDescription);
   }

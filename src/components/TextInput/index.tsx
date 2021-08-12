@@ -1,13 +1,18 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { FormControl } from "react-bootstrap";
-import PropTypes from "prop-types";
 import "./TextInput.scss";
 import BaseInput from "components/BaseInput";
-TextInput.propTypes = {};
+import BaseInputModel from "components/BaseInput/BaseInput.model";
 
-function TextInput(props) {
+interface TextInputProps extends BaseInputModel {
+  placeholder: string,
+  currentValue:  string,
+  onInputChange: Function
+}
+
+function TextInput(props: TextInputProps) {
   const { label, placeholder, isRequired, currentValue, onInputChange } = props;
-  function handleInputChange(event) {
+  function handleInputChange(event: ChangeEvent<any>) {
     if (onInputChange) {
       onInputChange(event.target.value);
     }

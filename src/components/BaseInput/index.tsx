@@ -1,16 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './BaseInput.scss'
-BaseInput.propTypes = {
-    label: PropTypes.string,
-    isRequired: PropTypes.bool,
-};
+import BaseInputProps from './BaseInput.model';
+import './BaseInput.scss';
 
-function BaseInput(props) {
+function BaseInput(props: BaseInputProps) {
     const { label, isRequired } = props;
     return (
         <div className="base-input">
-            {/* if require, * appear */}
             <div className="label">
                 { label }
                 {

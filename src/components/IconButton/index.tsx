@@ -1,12 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import './IconButton.scss'
-index.propTypes = {
-    
-};
 
-function index(props) {
+interface IconButtonProps {
+    label: string,
+    iconSrc: string,
+    theme: string,
+    onButtonClick: Function
+}
+
+function IconButton(props: IconButtonProps) {
     const { label, iconSrc, theme, onButtonClick } = props;
     function handleButtonClick() {
         if (onButtonClick) {
@@ -23,4 +25,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default IconButton;

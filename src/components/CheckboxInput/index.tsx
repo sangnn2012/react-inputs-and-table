@@ -1,11 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import BaseInput from "components/BaseInput";
+import BaseInputProps from "components/BaseInput/BaseInput.model"
 import { InputGroup } from "react-bootstrap";
 import './CheckboxInput.scss'
-CheckboxInput.propTypes = {};
 
-function CheckboxInput(props) {
+interface CheckboxInputProps extends BaseInputProps {
+  isVal: boolean,
+  onInputToggle: Function
+}
+
+function CheckboxInput(props: CheckboxInputProps) {
   const { label, isRequired, isVal, onInputToggle } = props;
   function handleToggle() {
     if(onInputToggle) {

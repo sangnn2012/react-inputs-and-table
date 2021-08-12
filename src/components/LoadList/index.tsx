@@ -1,9 +1,16 @@
-import { useState } from "react";
-import * as ReactDOM from "react-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { ProductsLoader } from "./products-loader.jsx";
+import Table from "models/Table.model";
+import Load from "models/Load.model";
 
-const LoadList = (props) => {
+interface LoadListProps extends Table {
+  products: {
+    data: Array<any>,
+    total: number
+  }
+}
+
+const LoadList = (props: LoadListProps) => {
 
   const { products, dataState, onDataStateChange, onDataReceived } = props;
 
@@ -24,7 +31,7 @@ const LoadList = (props) => {
         <Column field="UpperLimit" filter="numeric" title="Upper Limit" width="200px" />
       </Grid>
 
-      <ProductsLoader dataState={dataState} onDataReceived={(products)=>{onDataReceived(products)}} />
+      <ProductsLoader dataState={dataState} onDataReceived={(products: Load[])=>{onDataReceived(products)}} />
     </div>
   );
 };

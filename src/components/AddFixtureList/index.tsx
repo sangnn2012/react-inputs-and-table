@@ -1,9 +1,13 @@
-import { useState } from "react";
-import * as ReactDOM from "react-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { FixturesLoader } from "./fixtures-loader.jsx";
+import TableModel from 'models/Table.model'
+import Fixture from 'models/Fixture.model'
 
-const AddFixtureList = (props) => {
+interface AddFixtureListProps extends TableModel {
+  fixtures: Fixture[]
+}
+
+const AddFixtureList = (props: AddFixtureListProps) => {
 
   const { fixtures, dataState, onDataStateChange, onDataReceived } = props;
 
@@ -24,7 +28,7 @@ const AddFixtureList = (props) => {
         <Column field="Description" filter="numeric" title="Description" width="300px" />
       </Grid>
 
-      <FixturesLoader dataState={dataState} onDataReceived={(fixtures)=>{onDataReceived(fixtures)}} />
+      <FixturesLoader dataState={dataState} onDataReceived={(fixtures: Fixture[])=>{onDataReceived(fixtures)}} />
     </div>
   );
 };

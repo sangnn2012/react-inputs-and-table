@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import DropdownInput from "components/DropdownInput";
 import AddLoadInput from "components/AddLoadInput";
 import TextInput from "components/TextInput";
@@ -7,71 +6,71 @@ import NumberInput from "components/NumberInput";
 import CheckboxInput from "components/CheckboxInput";
 import IconButton from "components/IconButton";
 import AddFixtureModal from 'components/AddFixtureModal';
-
 import plusIcon from '../../assets/images/plus-solid.svg';
 import contactIcon from '../../assets/images/address-book-solid.svg';
-
 import "./Inputs.scss";
 
-Inputs.propTypes = {};
+interface InputsProps {
+  onSubmitForm: Function
+}
 
-function Inputs(props) {
+function Inputs(props: InputsProps) {
   const { onSubmitForm } = props;
 
 
   const roomNames = ["Kitchen", "Basement", "Bedroom 1", "Equipment Room", "Kids Room", "Master Bath 1", "Kitchen", "Basement", "Bedroom 1", "Equipment Room", "Kids Room", "Master Bath 1"];
   const fixtureTypes = ["Type 1", "Type 2", "Type 3", "Type 4", "Type 5"];
   const loadTypes = ["0-10V (Fluorescent Ballast)", "0-10 (LED Driver)", "Ceiling Fan", "ELV/LED", "Fluorescent (2-wire)", "Incandescent", "MLV"];
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState<boolean>(false);
 
-  const [roomName, setRoomName] = useState("");
-  const [loadName, setLoadName] = useState("");
-  const [circuit, setCircuit] = useState("");
-  const [fixtureType, setFixtureType] = useState("");
-  const [loadType, setLoadType] = useState("");
-  const [fixtureQuantity, setFixtureQuantity] = useState("");
-  const [fixtureWatts, setFixtureWatts] = useState("");
-  const [lowerLimit, setLowerLimit] = useState("");
-  const [upperLimit, setUpperLimit] = useState("");
-  const [isDim, setIsDim] = useState("")
+  const [roomName, setRoomName] = useState<string>("");
+  const [loadName, setLoadName] = useState<string>("");
+  const [circuit, setCircuit] = useState<string>("");
+  const [fixtureType, setFixtureType] = useState<string>("");
+  const [loadType, setLoadType] = useState<string>("");
+  const [fixtureQuantity, setFixtureQuantity] = useState<number>(0);
+  const [fixtureWatts, setFixtureWatts] = useState<number>(0);
+  const [lowerLimit, setLowerLimit] = useState<number>(0);
+  const [upperLimit, setUpperLimit] = useState<number>(0);
+  const [isDim, setIsDim] = useState<boolean>(false);
 
-  function handleSelectRoom(roomChosen) {
+  function handleSelectRoom(roomChosen: string) {
     console.log({ roomChosen });
     setRoomName(roomChosen);
   }
-  function handleLoadNameChange(newLoadName) {
+  function handleLoadNameChange(newLoadName: string) {
     console.log({ newLoadName });
     setLoadName(newLoadName);
   }
-  function handleCircuitChange(newCircuit) {
+  function handleCircuitChange(newCircuit: string) {
     console.log({ newCircuit });
     setCircuit(newCircuit);
   }
-  function handleFixtureTypeSelect(newFixtureType) {
+  function handleFixtureTypeSelect(newFixtureType: string) {
     console.log({ newFixtureType });
     setFixtureType(newFixtureType);
   }
-  function handleLoadTypeSelect(newLoadType) {
+  function handleLoadTypeSelect(newLoadType: string) {
     console.log({ newLoadType });
     setLoadType(newLoadType);
   }
-  function handelFixtureQuantity(newFixtureQuantity) {
+  function handelFixtureQuantity(newFixtureQuantity: number) {
     console.log({ newFixtureQuantity });
     setFixtureQuantity(newFixtureQuantity);
   }
-  function handleFixtureWatts(newFixtureWatts) {
+  function handleFixtureWatts(newFixtureWatts: number) {
     console.log({ newFixtureWatts })
     setFixtureWatts(newFixtureWatts);
   }
-  function handleDimChange(newDimValue) {
+  function handleDimChange(newDimValue: boolean) {
     console.log({ newDimValue })
     setIsDim(newDimValue);
   }
-  function handleLowerLimit(newLowerLimit) {
+  function handleLowerLimit(newLowerLimit: number) {
     console.log({ newLowerLimit })
     setLowerLimit(newLowerLimit);
   }
-  function handleUpperLimit(newUpperLimit) {
+  function handleUpperLimit(newUpperLimit: number) {
     console.log({ newUpperLimit })
     setUpperLimit(newUpperLimit);
   }
@@ -86,11 +85,11 @@ function Inputs(props) {
     setCircuit('');
     setFixtureType('');
     setLoadType('');
-    setFixtureQuantity('');
-    setFixtureWatts('');
-    setLowerLimit('');
-    setUpperLimit('');
-    setIsDim('');
+    setFixtureQuantity(0);
+    setFixtureWatts(0);
+    setLowerLimit(0);
+    setUpperLimit(0);
+    setIsDim(false);
   }
 
   function handleAdd() {
@@ -120,15 +119,15 @@ function Inputs(props) {
       <h2>Inputs</h2>
       <div className="input-fields">
         <DropdownInput label={"Room Name:"} placeholder={"Room Name..."} isRequired={true} currentItem={roomName} options={roomNames} onItemChosen={handleSelectRoom} />
-        <AddLoadInput label={"Add Load:"} isRequired={true} currentLoad={loadName} onInputChange={handleLoadNameChange} onSubmit={handleFormSubmit} />
+        <AddLoadInput label={"Add Load:"} isRequired={true} onInputChange={handleLoadNameChange} onSubmit={handleFormSubmit} />
         <TextInput label={"Circuit #"} placeholder={"Circuit #"} isRequired={false} currentValue={circuit} onInputChange={handleCircuitChange} />
         <DropdownInput label={"Fixture Type:"} placeholder={"Fixture Type"} isRequired={false} currentItem={fixtureType} options={fixtureTypes} onItemChosen={handleFixtureTypeSelect} />
         <DropdownInput label={"Load Type:"} placeholder={"Load Type"} isRequired={true} currentItem={loadType} options={loadTypes} onItemChosen={handleLoadTypeSelect} />
-        <NumberInput label={"Fixture Qty:"} isRequired={true} currentQuantity={fixtureQuantity || 0} onQuantityChange={handelFixtureQuantity} />
-        <NumberInput label={"Fixture Watts:"} isRequired={true} currentQuantity={fixtureWatts || 0} onQuantityChange={handleFixtureWatts} />
+        <NumberInput label={"Fixture Qty:"} isRequired={true} currentQuantity={fixtureQuantity} onQuantityChange={handelFixtureQuantity} />
+        <NumberInput label={"Fixture Watts:"} isRequired={true} currentQuantity={fixtureWatts} onQuantityChange={handleFixtureWatts} />
         <CheckboxInput label={"Dim"} isRequired={false} isVal={isDim} onInputToggle={handleDimChange}></CheckboxInput>
-        <NumberInput label={"Lower Limit(%)"} isRequired={false} currentQuantity={lowerLimit || 0} onQuantityChange={handleLowerLimit} />
-        <NumberInput label={"Upper Limit(%)"} isRequired={false} currentQuantity={upperLimit || 0} onQuantityChange={handleUpperLimit} />
+        <NumberInput label={"Lower Limit(%)"} isRequired={false} currentQuantity={lowerLimit} onQuantityChange={handleLowerLimit} />
+        <NumberInput label={"Upper Limit(%)"} isRequired={false} currentQuantity={upperLimit} onQuantityChange={handleUpperLimit} />
 
         <IconButton label={"Add"} iconSrc={plusIcon} theme={'primary'} onButtonClick={handleAdd} />
         <IconButton label={"Fixture Library"} iconSrc={contactIcon} theme={'success'} onButtonClick={handOpenFixtureLibrary} />

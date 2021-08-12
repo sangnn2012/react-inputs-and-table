@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useRef } from "react";
 import * as ReactDOM from "react-dom";
 import { toODataString } from "@progress/kendo-data-query";
 
@@ -10,8 +10,8 @@ export const ProductsLoader = (props) => {
     headers: {},
   };
 
-  const lastSuccess = React.useRef("");
-  const pending = React.useRef("");
+  const lastSuccess = useRef("");
+  const pending = useRef("");
 
   const requestDataIfNeeded = () => {
     if (pending.current || toODataString(props.dataState) === lastSuccess.current) {
