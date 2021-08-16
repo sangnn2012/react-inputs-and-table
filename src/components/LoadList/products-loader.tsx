@@ -52,6 +52,8 @@ export const ProductsLoader = (props: ProductLoaderProps) => {
           IsDim: true,
           LowerLimit: 5,
           UpperLimit: 95,
+          FirstOrderedOn: new Date(),
+          UnitPrice: 101
         };
         const data = new Array(65).fill(0).map((_, index) => Object.assign({ID: ++index}, aRow));
 

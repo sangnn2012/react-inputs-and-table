@@ -1,14 +1,17 @@
 import "./App.scss";
 import Inputs from "./components/Inputs";
 import LoadList from "./components/LoadList";
-import { useState } from "react";
+import React, { useState } from "react";
 // import Load from "models/Load.model";
 import Pagination from "models/Pagination.model";
-
+import DropdownInput from "components/DropdownInput";
 interface Loads {
   data: Array<any>;
   total: number;
 }
+
+type Language = 'en-US' | 'vi-VN' | 'es-ES' | 'hi-HI';
+
 
 function App() {
   const initLoads: Loads = {
@@ -21,6 +24,9 @@ function App() {
     skip: 0,
   });
 
+  const languages: Language[] = ['en-US', 'vi-VN', 'es-ES', 'hi-HI'];
+  const [lang, setLang] = useState<string>('en-US');
+  
   function dataStateChange(event: any) {
     setDataState(event.dataState);
   }
@@ -36,13 +42,25 @@ function App() {
     cloneProducts.data = [...products.data];
     cloneProducts.data.unshift(newLoadData);
     cloneProducts.total = ++products.total;
-    setProducts(cloneProducts);
+    
+    // setProducts(prevProducts => {
+    //   data: [newLoadData, ...prevProducts.data],
+    //   total: ++prevProducts.total
+    // });
+
+    setProducts(cloneProducts)
+  }
+
+  function handleLanguageChange(newLang: Language) {
+    setLang(newLang);
+    console.log({newLang});
   }
 
   return (
     <div className="app">
+      <DropdownInput label={'Language Selector:'} placeholder={''} isRequired={false} currentItem={lang} options={languages} onItemChosen={handleLanguageChange}/>
       <Inputs onSubmitForm={handleSubmitForm} />
-      <LoadList products={products} dataState={dataState} onDataStateChange={dataStateChange} onDataReceived={dataReceived} />
+      <LoadList products={products} language={lang} dataState={dataState} onDataStateChange={dataStateChange} onDataReceived={dataReceived} />
     </div>
   );
 }

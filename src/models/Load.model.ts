@@ -9,6 +9,8 @@ interface Load {
   IsDim: boolean;
   LowerLimit: number;
   UpperLimit: number;
+  FirstOrderedOn: Date;
+  UnitPrice: number;
 }
 
 export default Load;
