@@ -10,15 +10,15 @@ import upCaret from "../../assets/images/caret-up-solid.svg";
 import "./NumberInput.scss";
 
 interface NumberInputProps extends BaseInputModel {
-  currentQuantity: number,
-  onQuantityChange: Function
+  currentQuantity: number;
+  onQuantityChange: (input: number) => void;
 }
 
 function NumberInput(props: NumberInputProps) {
   const { label, isRequired, currentQuantity, onQuantityChange } = props;
-  function handleQuantityInput(event: ChangeEvent<any>) {
+  function handleQuantityInput(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (onQuantityChange) {
-      onQuantityChange(event.target.value);
+      onQuantityChange(parseInt(event.target.value));
     }
   }
   function handleQuantityChange(operator: string) {

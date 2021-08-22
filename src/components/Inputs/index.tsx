@@ -8,10 +8,11 @@ import IconButton from "components/IconButton";
 import AddFixtureModal from 'components/AddFixtureModal';
 import plusIcon from '../../assets/images/plus-solid.svg';
 import contactIcon from '../../assets/images/address-book-solid.svg';
+import Load from 'models/Load.model';
 import "./Inputs.scss";
 
 interface InputsProps {
-  onSubmitForm: Function
+  onSubmitForm: (input: Load) => void;
 }
 
 function Inputs(props: InputsProps) {

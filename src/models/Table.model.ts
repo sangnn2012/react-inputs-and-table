@@ -1,6 +1,6 @@
-import Pagination from './Pagination.model'
+import { State as GridState } from '@progress/kendo-data-query';
 interface TableModel {
-    dataState: Pagination,
+    dataState: GridState,
     onDataStateChange: Function,
     onDataReceived: Function
 }

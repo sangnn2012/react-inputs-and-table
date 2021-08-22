@@ -2,7 +2,8 @@ import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { ProductsLoader } from "./products-loader";
 import Table from "models/Table.model";
 import Load from "models/Load.model";
-import { IntlProvider, load, LocalizationProvider, loadMessages } from "@progress/kendo-react-intl";
+import { IntlProvider, load, LocalizationProvider } from "@progress/kendo-react-intl";
+import Loads from 'models/Loads.model';
 
 import likelySubtags from 'cldr-core/supplemental/likelySubtags.json';
 import currencyData from 'cldr-core/supplemental/currencyData.json';
@@ -32,15 +33,15 @@ load(viNumbers, viCurrencies, viCaGregorian, viDateFields, viTimeZoneNames );
 load(hiNumbers, hiCurrencies, hiCaGregorian, hiDateFields, hiTimeZoneNames );
 
 
-interface LoadListProps extends Table {
+interface LoadListProps<Load> extends Table {
   products: {
-    data: Array<any>;
+    data: Array<Load>;
     total: number;
   };
   language: string;
 }
 
-const LoadList = (props: LoadListProps) => {
+const LoadList = (props: LoadListProps<Load>) => {
   const { products, language, dataState, onDataStateChange, onDataReceived } = props;
 
   return (
@@ -68,7 +69,7 @@ const LoadList = (props: LoadListProps) => {
       </LocalizationProvider>
       <ProductsLoader
         dataState={dataState}
-        onDataReceived={(products: Load[]) => {
+        onDataReceived={(products: Loads<Load>) => {
           onDataReceived(products);
         }}
       />

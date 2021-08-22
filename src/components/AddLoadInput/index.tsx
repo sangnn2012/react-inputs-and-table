@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import BaseInput from 'components/BaseInput';
 import './AddLoadInput.scss';
@@ -6,13 +7,13 @@ import BaseInputModel from 'components/BaseInput/BaseInput.model';
 import { ChangeEvent } from 'react';
 
 interface AddLoadInputProps extends BaseInputModel {
-    onInputChange: Function,
-    onSubmit: Function
+    onInputChange: (input: string) => void;
+    onSubmit: () => void;
 }
 
 function AddLoadInput(props: AddLoadInputProps) {
     const { label, isRequired, onInputChange, onSubmit } = props;
-    function handleInputChange(event: ChangeEvent<any>) {
+    function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         if (onInputChange) {
             onInputChange(event.target.value)
         }

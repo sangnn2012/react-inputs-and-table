@@ -3,22 +3,21 @@ import { Dropdown, ButtonGroup, FormControl } from "react-bootstrap";
 import BaseInput from "components/BaseInput";
 import BaseInputModel from "components/BaseInput/BaseInput.model";
 import "./DropdownInput.scss";
-
 interface DropdownInputProps extends BaseInputModel {
-  placeholder: string,
-  currentItem: string,
-  options: Array<string>,
-  onItemChosen: Function
+  placeholder: string;
+  currentItem: string;
+  options: Array<string>;
+  onItemChosen: (input: string) => void;
 }
 
 function DropdownInput(props: DropdownInputProps) {
   const { label, placeholder, isRequired, currentItem, options, onItemChosen } = props;
-  function handleItemChosen(name: string | null) {
-    if (onItemChosen) {
+  function handleItemChosen(name:  string | null) {
+    if (onItemChosen && name) {
       onItemChosen(name);
     }
   }
-  function handleInputChange(event: ChangeEvent<any>) {
+  function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (onItemChosen) {
       onItemChosen(event.target.value);
     }

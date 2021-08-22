@@ -4,8 +4,8 @@ import { InputGroup } from "react-bootstrap";
 import './CheckboxInput.scss'
 
 interface CheckboxInputProps extends BaseInputProps {
-  isVal: boolean,
-  onInputToggle: Function
+  isVal: boolean;
+  onInputToggle: (input: boolean) => void;
 }
 
 function CheckboxInput(props: CheckboxInputProps) {

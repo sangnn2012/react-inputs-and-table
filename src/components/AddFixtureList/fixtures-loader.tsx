@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { toODataString } from "@progress/kendo-data-query";
-import Pagination from 'models/Pagination.model'
+import { State as GridState } from "@progress/kendo-data-query";
 
 interface FixtureLoaderProps {
-  dataState: Pagination,
-  onDataReceived: Function
+  dataState: GridState;
+  onDataReceived: Function;
 }
 
 export const FixturesLoader = (props: FixtureLoaderProps) => {
@@ -51,10 +51,11 @@ export const FixturesLoader = (props: FixtureLoaderProps) => {
           ModelNumber: "Model-999",
           Description: "Late 2021 Model",
         };
-        const data = new Array(65).fill(0).map((_, index) => Object.assign({ID: ++index}, aRow));
+        const data = new Array(65).fill(0).map((_, index) => Object.assign({ ID: ++index }, aRow));
 
-        let { take, skip } = props.dataState
-        const dataToShow = data.slice(skip, take+skip)
+        const {take = 10, skip = 0} = props.dataState;
+
+        const dataToShow = data.slice(skip, take + skip);
         props.onDataReceived({
           data: dataToShow,
           total: data.length,

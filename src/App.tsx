@@ -3,39 +3,36 @@ import Inputs from "./components/Inputs";
 import LoadList from "./components/LoadList";
 import React, { useState } from "react";
 // import Load from "models/Load.model";
-import Pagination from "models/Pagination.model";
+// import Pagination from "models/Pagination.model";
+import Language from "models/Language.model";
 import DropdownInput from "components/DropdownInput";
-interface Loads {
-  data: Array<any>;
-  total: number;
-}
-
-type Language = 'en-US' | 'vi-VN' | 'es-ES' | 'hi-HI';
-
-
+import Load from 'models/Load.model';
+import Loads from 'models/Loads.model';
+import { GridDataStateChangeEvent } from "@progress/kendo-react-grid";
+import { State as GridState } from '@progress/kendo-data-query';
 function App() {
-  const initLoads: Loads = {
+  const initLoads: Loads<Load> = {
     data: [],
     total: 0,
   };
-  const [products, setProducts] = useState<Loads>(initLoads);
-  const [dataState, setDataState] = useState<Pagination>({
+  const [products, setProducts] = useState<Loads<Load>>(initLoads);
+  const [dataState, setDataState] = useState<GridState>({
     take: 10,
     skip: 0,
   });
-
+  console.log({dataState})
   const languages: Language[] = ['en-US', 'vi-VN', 'es-ES', 'hi-HI'];
-  const [lang, setLang] = useState<string>('en-US');
+  const [lang, setLang] = useState<Language>('en-US');
   
-  function dataStateChange(event: any) {
+  function dataStateChange(event: GridDataStateChangeEvent) {
     setDataState(event.dataState);
   }
-  function dataReceived(products: Loads) {
+  function dataReceived(products: Loads<Load>) {
     setProducts(products);
   }
-  function handleSubmitForm(newLoadData: Loads) {
-    console.log({ newLoadData });
-    const cloneProducts: Loads = {
+  function handleSubmitForm(newLoadData: Load) {
+    // console.log({ newLoadData });
+    const cloneProducts: Loads<Load> = {
       data:[],
       total: 0
     }
@@ -51,16 +48,17 @@ function App() {
     setProducts(cloneProducts)
   }
 
-  function handleLanguageChange(newLang: Language) {
-    setLang(newLang);
-    console.log({newLang});
+  function handleLanguageChange(newLang: string) {
+    const lang = newLang as Language;
+    setLang(lang);
+    console.log(newLang);
   }
 
   return (
     <div className="app">
       <DropdownInput label={'Language Selector:'} placeholder={''} isRequired={false} currentItem={lang} options={languages} onItemChosen={handleLanguageChange}/>
       <Inputs onSubmitForm={handleSubmitForm} />
-      <LoadList products={products} language={lang} dataState={dataState} onDataStateChange={dataStateChange} onDataReceived={dataReceived} />
+      <LoadList products={products} language={lang} dataState={dataState} onDataStateChange={(event: GridDataStateChangeEvent) => dataStateChange(event)} onDataReceived={dataReceived} />
     </div>
   );
 }
