@@ -8,7 +8,7 @@ import Loads from "models/Loads.model";
 
 interface ProductLoaderProps {
   dataState: GridState;
-  onDataReceived: (data: Loads<Load>) => void;
+  onDataReceived: (data: Loads) => void;
 }
 
 export const ProductsLoader = (props: ProductLoaderProps) => {
@@ -57,6 +57,8 @@ export const ProductsLoader = (props: ProductLoaderProps) => {
           UnitPrice: 101,
         };
         const data = new Array(65).fill(0).map((_, index) => Object.assign({ ID: ++index }, aRow));
+        // const {take, skip} = props.dataState;
+
         const {take = 10, skip = 0} = props.dataState;
         const dataToShow = data.slice(skip, take + skip);
           props.onDataReceived({

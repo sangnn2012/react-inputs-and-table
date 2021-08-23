@@ -11,11 +11,11 @@ import Loads from 'models/Loads.model';
 import { GridDataStateChangeEvent } from "@progress/kendo-react-grid";
 import { State as GridState } from '@progress/kendo-data-query';
 function App() {
-  const initLoads: Loads<Load> = {
+  const initLoads: Loads = {
     data: [],
     total: 0,
   };
-  const [products, setProducts] = useState<Loads<Load>>(initLoads);
+  const [products, setProducts] = useState<Loads>(initLoads);
   const [dataState, setDataState] = useState<GridState>({
     take: 10,
     skip: 0,
@@ -27,12 +27,12 @@ function App() {
   function dataStateChange(event: GridDataStateChangeEvent) {
     setDataState(event.dataState);
   }
-  function dataReceived(products: Loads<Load>) {
+  function dataReceived(products: Loads) {
     setProducts(products);
   }
   function handleSubmitForm(newLoadData: Load) {
     // console.log({ newLoadData });
-    const cloneProducts: Loads<Load> = {
+    const cloneProducts: Loads = {
       data:[],
       total: 0
     }

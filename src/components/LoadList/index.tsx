@@ -69,7 +69,7 @@ const LoadList = (props: LoadListProps<Load>) => {
       </LocalizationProvider>
       <ProductsLoader
         dataState={dataState}
-        onDataReceived={(products: Loads<Load>) => {
+        onDataReceived={(products: Loads) => {
           onDataReceived(products);
         }}
       />

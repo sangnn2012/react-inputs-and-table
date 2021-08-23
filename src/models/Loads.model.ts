@@ -1,6 +1,6 @@
-// import Load from './Load.model';
+import Load from './Load.model';
 
-interface Loads<Load> {
+interface Loads {
   data: Array<Load>;
   total: number;
 }

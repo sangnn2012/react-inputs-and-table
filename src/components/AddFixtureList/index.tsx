@@ -1,7 +1,7 @@
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { FixturesLoader } from "./fixtures-loader";
-import TableModel from 'models/Table.model'
-import Fixture from 'models/Fixture.model'
+import TableModel from 'models/Table.model';
+import Fixture from 'models/Fixture.model';
 
 interface AddFixtureListProps extends TableModel {
   fixtures: Fixture[]
